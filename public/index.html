@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090b10" />
+    <title>Shipyard — Deployment Dashboard</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Shipyard home">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span>SHIPYARD</span>
+        </a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a class="active" href="#overview">Overview</a>
+          <a href="#deployments">Deployments</a>
+          <a href="#settings">Settings</a>
+        </nav>
+        <button class="profile" type="button" aria-label="Open account menu">AP</button>
+      </header>
+
+      <main>
+        <section class="hero" id="overview">
+          <div>
+            <p class="eyebrow"><span class="live-dot"></span> Production</p>
+            <h1>mcp-docker-vercel-pipeline</h1>
+          </div>
+          <button class="deploy-button" id="deploy-button" type="button">
+            <span aria-hidden="true">↗</span>
+            Deploy
+          </button>
+        </section>
+
+        <section class="metrics" aria-label="Deployment summary">
+          <article class="metric-card">
+            <div class="metric-icon green" aria-hidden="true">✓</div>
+            <div>
+              <p>Latest deployment</p>
+              <strong id="deployment-status">Ready</strong>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon blue" aria-hidden="true">↗</div>
+            <div>
+              <p>Environment</p>
+              <strong>Production</strong>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon violet" aria-hidden="true">◷</div>
+            <div>
+              <p>Last update</p>
+              <strong id="last-update">Just now</strong>
+            </div>
+          </article>
+        </section>
+
+        <section class="deployments" id="deployments">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Activity</p>
+              <h2>Recent deployments</h2>
+            </div>
+            <button class="filter-button" type="button" id="filter-button">All environments <span>⌄</span></button>
+          </div>
+
+          <div class="deployment-list" id="deployment-list">
+            <article class="deployment-row" data-environment="production">
+              <div class="status-wrap"><span class="status ready"></span></div>
+              <div class="deployment-info">
+                <div class="deployment-title">
+                  <strong>Production</strong>
+                  <span class="badge">Ready</span>
+                </div>
+                <p>main <span>•</span> 8f2c1a4</p>
+              </div>
+              <div class="deployment-meta">
+                <span>Today</span>
+                <small>Current</small>
+              </div>
+              <button class="row-menu" type="button" aria-label="Deployment options">•••</button>
+            </article>
+
+            <article class="deployment-row" data-environment="preview">
+              <div class="status-wrap"><span class="status ready"></span></div>
+              <div class="deployment-info">
+                <div class="deployment-title">
+                  <strong>Preview</strong>
+                  <span class="badge">Ready</span>
+                </div>
+                <p>feature/ui <span>•</span> 3b9d82e</p>
+              </div>
+              <div class="deployment-meta">
+                <span>Yesterday</span>
+                <small>Preview</small>
+              </div>
+              <button class="row-menu" type="button" aria-label="Deployment options">•••</button>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Deployment started</div>
+    <script src="./app.js"></script>
+  </body>
+</html>

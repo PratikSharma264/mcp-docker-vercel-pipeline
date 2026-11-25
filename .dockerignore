@@ -1,0 +1,6 @@
+.git
+.gitignore
+.github
+public/release.txt
+Dockerfile*
+README*
