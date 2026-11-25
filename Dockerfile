@@ -1,7 +1,3 @@
-FROM nginx:1.27-alpine
+FROM nginx:1.30.6-alpine3.24
 
 COPY public/ /usr/share/nginx/html/
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
