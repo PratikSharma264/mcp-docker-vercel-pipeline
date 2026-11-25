@@ -28,6 +28,11 @@ jobs:
       - name: Wait for HTTP server
         run: curl --fail --silent --retry 5 --retry-connrefused --retry-delay 1 --output /dev/null http://127.0.0.1:8080/
 
+        # This step is here to debug crashes!
+      - name: Print container logs on failure
+        if: failure()
+        run: docker logs deployment-pulse
+
       - name: Verify release gate
         run: curl --fail --silent --output /dev/null http://127.0.0.1:8080/release.txt
 
