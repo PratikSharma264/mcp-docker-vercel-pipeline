@@ -1,0 +1,41 @@
+name: Container CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify-container:
+    name: Verify Docker release
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build container
+        run: docker build --tag deployment-pulse:ci .
+
+      - name: Start container
+        run: docker run --detach --name deployment-pulse --publish 127.0.0.1:8080:80 deployment-pulse:ci
+
+      - name: Wait for HTTP server
+        run: curl --fail --silent --retry 5 --retry-connrefused --retry-delay 1 --output /dev/null http://127.0.0.1:8080/
+
+        # This step is here to debug crashes!
+      - name: Print container logs on failure
+        if: failure()
+        run: docker logs deployment-pulse
+
+      - name: Verify release gate
+        run: curl --fail --silent --output /dev/null http://127.0.0.1:8080/release.txt
+
+      - name: Clean up container
+        if: ${{ always() }}
+        run: docker rm --force deployment-pulse
