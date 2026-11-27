@@ -105,6 +105,10 @@ h1 {
   background: rgba(12, 29, 48, 0.82);
 }
 
+.environment-card {
+  border-color: rgba(110, 231, 183, 0.42);
+}
+
 .pipeline-card h2,
 .flow h2 {
   margin: 1rem 0 0.7rem;
